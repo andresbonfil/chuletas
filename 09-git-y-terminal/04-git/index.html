@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Git</title>
+</head>
+<body>
+    <a href="../03-unix/">03-UNIX</a>
+    <a href="../">/HOME/</a>
+    <a href="../05-miproyecto/">05-MiProyecto</a>
+    <h1>4. Git</h1>
+    <ol>
+        <li><a href="#1">¿Que es git y para que sirve?</a></li>
+        <li><a href="#2">¿Como instalar Git?</a></li>
+        <li><a href="#3">Configurar usuario</a></li>
+        <li><a href="#4">Ayuda en git</a></li>
+        <li><a href="#5">Crear un repositorio</a></li>
+        <li><a href="#6">Clonar repositorios</a></li>
+        <li><a href="#7">Espacio de trabajo(El stage)</a></li>
+        <li><a href="#8">Status, add y diff</a></li>
+        <li><a href="#9">Git ignore</a></li>
+        <li><a href="#10">Commit y versiones</a></li>
+        <li><a href="#11">Reset y checkout</a></li>
+        <li><a href="#12">Deshacer Commit</a></li>
+        <li><a href="#13">Volver a un commit anterior</a></li>
+        <li><a href="#14">Buscar Commits(Si tuvieramos miles de commits)</a></li>
+        <li><a href="#15">Ramas y merges</a></li>
+        <li><a href="#16">Stash</a></li>
+        <li><a href="#17">Cherry pick</a></li>
+        <li><a href="#18">Como resolver conflictos</a></li>
+        <li><a href="#19">Repositorios remotos y github</a></li>
+    </ol>
+    <ol>
+        <li id="1">
+            ¿Que es git y para que sirve?
+            <ul>
+                <li>Es un sistema de control de versiones</li>
+                <li>Trabajo en equipo</li>
+                <li>Listado y fecha de cambios(commit)</li>
+                <li>Volver atrás en el tiempo restablecer cambios</li>
+                <li>Ramas de desarrollo</li>
+                <li>Mezclar cambios entre compañeros</li>
+            </ul>
+        </li>
+        <li id="2">
+            ¿Como instalar Git?
+            <ul>
+                <li>git-scm.com - windows</li>
+                <li>CYGWIN - virtual windows</li>
+                <li>Mac Build - Mac Version</li>
+                <li>apt-get install git - Linux</li>
+                <li>aptitude install git - Debian</li>
+            </ul>
+        </li>
+        <li id="3">
+            Configurar usuario
+            <ul>
+                <li>git --version</li>
+                <li>git config --global user.name "Andrés Bonfil" (nombre de usuario)</li>
+                <li>git config --global user.email "&lt;andresbonfil@gmail.com&gt;" (correo electronico)</li>
+                <li>git config --list (para ver si ya los tengo configurados)</li>
+                <li></li>
+            </ul>
+        </li>
+        <li id="4">
+            Ayuda en git
+            <ul>
+                <li>git help init - nos muestra la ayuda del comando init</li>
+            </ul>
+        </li>
+        <li id="5">
+            Crear un repositorio
+            <ul>
+                <li>Dentro de la carpeta del proyecto ejecutamos git init</li>
+                <li>ls -lha para ver el repositorio(carpeta) oculto .git</li>
+            </ul>
+        </li>
+        <li id="6">
+            Clonar repositorios
+            <ul>
+                <li>Desde repositorio local o desde la nuve</li>
+                <li>Desde una carpeta superior hacemos git clone ./05-miproyecto proyectoclonado - como no se ha commiteado nada aparece de vacio - pero aparece la rama maste o main asi como la carpeta oculta .git(elrepositorio) ls -lha (de esta manera clonamos de manera local)</li>
+                <li>git clone https://github.com/andresbonfil/andresbonfil.github.io.git proyectoNube nos clona desde github en una carpeta proyectonube</li>
+            </ul>
+        </li>
+        <li id="7">
+            Espacio de Trabajo (el stage)
+            <ul>
+                <li>git status - muestra el estado del stage en que rama nos encontramos</li>
+                <li>git add images/ - se añade la carpeta imagenes al stage con todo su contenido</li>
+                <li>git add index.html - añade el archivo index.html</li>
+                <li>git add . - añade absolutamente todo al stage</li>
+                <li>git rm --cached pagina1.html  quita del stage la pagina1.html</li>
+            </ul>
+        </li>
+        <li id="8">
+            Status, add y diff
+            <ul>
+                <li>A este punto hacemos cambios que ya teniamos estageados todos los archivos y hacemos git status, nos aparecera que esos cambios no seran comiteados hasta que los estagiemos de nuevo // estageamos solo index y pagina uno no queremos los cambios git checkout pagina1.html nos devuelve a antes de los cambios</li>
+                <li>git diff pagina1.html muestra los cambios que ha sufrido el archivo</li>
+            </ul>
+        </li>
+        <li id="9">
+            Gitignore
+            <ul>
+                <li>creamos en la raiz del proyecto el archivo .gitignore (touch .gitignore)</li>
+                <li>podemos editar el archivo .gitignore con el comando nano .gitignore (dentro escribimos los archivos.extension que no queremos darles seguimiento y por ende stagear o comitear) el .gitignore si se puede estagear y comitear pero desde que se crea ya deja de trackear archivos ignorados en el archivo</li>
+                <li>Nomas al agregar el archivo conexion.php al archivo git ignore no importa si esta en subcarpeta, siempre va ser ignorado</li>
+                <li>Si agregamos al archivo gitignore la linea config/ la carpeta config y lo que contiene no va ser tomado en cuenta, donde quiera que la carpeta se encuentre</li>
+            </ul>
+        </li>
+        <li id="10">
+            Commit y versiones
+            <ul>
+                <li>git commit -m "Contiene todos los archivos iniciales"</li>
+                <li>git log --oneline (En una sola linea)</li>
+                <li>git log (Mas detallado)</li>
+                <li>git commit -am "cambios en los textos de la pagina" (stagea y comitea de un tiron)</li>
+                <li>git diff 945f188 f630f89 (compara el utltimo con el anterior[primero se pone el mas reciente y luego se pone el anterior si no lo hace todo al revéz])</li>
+            </ul>
+        </li>
+        <li id="11">
+            Reset y checkout
+            <ul>
+                <li>git reset HEAD index.html (desestagean cambios)</li>
+                <li>git reset . (desestagean cambios)</li>
+                <li>git checkout index.html (los cambios se deshacen) [no sirvió]</li>
+            </ul>
+        </li>
+        <li id="12">
+            Deshacer Commit
+            <ul>
+                <li>git reset --hard HEAD~0  (Este no borra nada ya que se queda en el HEAD)</li>
+                <li>git reset --hard HEAD~1  (Este borra EL ULTIMO)</li>
+                <li>git reset --hard HEAD~2  (Este borra LOS DOS ULTIMO y sí sucesivamente) </li>
+                <li>git reset --hard 72dca06 (te deja hasta ese commit)</li>
+                <li>git reset --hard 72dca06~1 (te deja hasta el comit anterior de ese commit)</li>
+                <li>git reset HEAD~1 (Esto deshace el ultimo commits pero te dejar en los archivos desestajeados por si los quiere utilizar)</li>
+            </ul>
+        </li>
+        <li id="13">
+            Volver a un commit anterior
+            <ul>
+                <li>git checkout &lt;72dca06&gt; (nos lleava para el commit especifico y se puede volver)</li>
+                <li>si hacemos un nuevo commit desde un commit anterior cuando volamos al ultimo o mas reciente commit nos advierte se perderá nos sugiere hacer le una nueva rama a ese commit que va ser olvidado</li>
+                <li>git branch &lt;NOMBRE-RAMA&gt; e11a530</li>
+                <li>git branch &lt;NOMBRE-RAMA&gt; y nos cambia de rama para seguir otra ruta</li>
+            </ul>
+        </li>
+        <li id="14">
+            Buscar Commits (Si tuvieramos miles de commits)
+            <ul>
+                <li>git log --grep=iniciales</li>
+                <li>commit 945f18888167a1197fda16a86279a814c0061838
+                    Author: Andres Bonfil <andresbonfil@gmail.com>
+                    Date:   Mon May 26 18:53:02 2025 -0600
+                </li>
+                <li>puedo volver hacer cambios y luego volver al checkout master</li>
+                <li>git log -s 'titulo del h1 o algo dentro del commit' - nos devuelve commit relacionados</li>
+            </ul>
+        </li>
+        <li id="15">
+            Ramas y Merges (nos permite ramificar el proyecto para desarrollar en paralelo diferentes funcionalidades)
+            <ul>
+                <li>git branch - lista las ramas</li>
+                <li>git branch list - crea la rama list (si hacemos git branch ya nos aparece en la lista)</li>
+                <li>git ceckout &lt;Nombre-Rama&gt; nos cambia entre ramas (si hacemos cambios en una rama no apareceran en otras ramas)</li>
+                <li>git checkout master me devuelve a la rama master</li>
+                <li>git branch -d list (no borra si tiene cambios que no se han mesclado, si no tiene cambios si se borra)</li>
+                <li>git branch -D list (si borra aunque tenga cambios que no se hallan mezclado)</li>
+                <li>git merge contacto (desde la rama master donde no tengo la funcionalidad contacto)</li>
+                <li>git checkout pruebas y desde pruebas me quiero traer todo lo que tiene master y actualizar la rama de pruebas git merge master (y nos traer todo contacto y lo de master)</li>
+                <li>git help merge - muestra mas opciones</li>
+                <li>git help branch - mas opciones</li>
+            </ul>
+        </li>
+        <li id="16">
+            Stash
+            <ul>
+                <li>Si estubiera trabajando en la rama pruebas y mi jefe me dice oie urge cambiar la pagina de contacto, si directamente me cambio sin estagear o estageado lo que estoy haciendo se lo lleva a la rama de contacto</li>
+                <li>para no llevarte lo que estas trabajando y sin perderlos para eso stash</li>
+                <li>git stash (guarda en memoria temporal)</li>
+                <li>git stash pop devuelve</li>
+                <li>git stash clear LIMPIA EL STASH</li>
+            </ul>
+        </li>
+        <li id="17">
+            Cherry pick
+            <ul>
+                <li>Supongamos que terminamos una funcionalidad en una rama ej pruebas</li>
+                <li>Nos piden que esa funcionalida ya terminada la van a usar en produccion</li>
+                <li>solo queremos lo terminado no nos interesa tu historial de cambios</li>
+                <li>hacemos un cherry pick</li>
+                <li>git checkout master</li>
+                <li>git cherry-pick &lt;hash&gt; (del git log de la otra rama)</li>
+                <li>es un sustituto del merge pero mas especifico</li>
+            </ul>
+        </li>
+        <li id="18">
+            Como resolver conflictos
+            <ul>
+                <li>Si se hace un merge y dos usuarios tocaron la misma linea de codigo te va a pedir con cual te quieres quedar con el actual de tu rama o el entrante que te entra</li>
+                <li>Una vez lo decides solo vuelves stagear y comitear</li>
+            </ul>
+        </li>
+        <li id="19">
+            Repositorios remotos y github
+            <ul>
+                <li>hacer repositorio en github</li>
+                <li>git remote add origin https://github.com/usuario/repo1.git</li>
+                <li>git push -u origin master</li>
+                <li>push para subir</li>
+                <li>pull para bajar</li>
+                <li>desde remoto creo una rama usuario y creo un archivo config.yml</li>
+                <li>git fetch --all (nos baja todas las ramas en remoto)</li>
+                <li>git checkout usuarios</li>
+                <li>git fecht  --all</li>
+                <li>literal todo lo mas basico</li>
+            </ul>
+        </li>
+    </ol>
+</body>
+</html>

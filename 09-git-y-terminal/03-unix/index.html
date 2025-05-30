@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3. Unix</title>
+</head>
+<body>
+    <a href="../02-cmd/">02-CMD</a>
+    <a href="../">/HOME/</a> --
+    <a href="../04-git/">04-GIT</a>
+    <h1>3. UNIX</h1>
+    <ol>
+        <li>Simulador de terminal(Solo para windows CYGWIN)</li>
+        <p>Install from Internet // C:\cygwin64 (All users recomenderd) // Local packages (C:\cygwin_packages) // Direct Connection // Elige un server para descarga (cual sea) // Packages (git, openssh, nano, wget, otros de linux ) //finish</p>
+        <li>Introducción a la terminal</li>
+        <p>vps(remoto) puedes usar // virtualBox // nombreUsuario@nombreEquipo:~# usuarioRoot // si aparece birulilla ~ estas en el directorio de tu usuario /home/Andres // si te aparece root@acer: / (estas el directorio raiz) // cd ~ nos lleva al directorio home // man pages miramos la ayuda de cualquier comando man ifconfig nos trae el manual del comando // whatis mkdir también nos trae información del comando whatis reboot whatis halt reiniciar //reboot, logout cierra cesion, clear nos limpia pantalla, reset tambien limpia pantalla, date muestra fecha, cal muestra calendario // histoy historial de comandos escritos // $ usario normal # super usuario</p>
+        <li>Ficheros y directorios</li>
+        <p>ls lista carpeta // ls -l muestra en forma de lista // ls -lha muestra ocultos y mas datos // ls -lh vista humano // ls -d muestra directorio actual . // ls -lhR lista infinita // clear limpia pantalla // ls -lh /home nos lista el contenido de otra ruta //mkdir probando/imagenes -p crea dos carpetas de un tiro // pwd nos dice donde estamos nos muesta la ruta // cd nos lleva directo al home del usuario ~ // cd /rut/especifica // cd .. directorio anterior // cd . directorio actual // rmdir imagenes/ remuve esa carpeta desde su directorio padre //  ls -lR muestra listado con contenido de subcarpeta // rm -rf imagenes -elimna forsadamente la carpeta con su contenido // echo "Hola que tal estas" > prueba.txt - crea contenido en el archivo exista o no (lo creará) // cat prueba.txt - imprime por consola contenido // mv prueba.txt imagenes/prueba.txt - mueve prueba a la carpeta imagenes //  cp imagenes/* ./ - copia todo lo de la carpeta imagenes al directorio actual // $ df -h nos muestra cuanto espacio disponible tenemos // du /bin muestra en bytes du -h /bin 16M también du -hs /bin  // </p>
+        <li>Gestión de usuarios</li>
+        <p>whoami - devuelve nombre de usuario // id información del usuario actual // useradd -g users -d /home/andi -s /bin/bash -m -k -d andi  --para crear usuario  // passwd andi -- Enter new UNIX password: Retype new UNIX password:  // cat /etc/shadow muestra las contraseñas por usuario cifrado // su andi -- te logea como ese usuario o como root segun permisos // su te deja logear como super usuario</p>
+        <li>Permisos linux y mac</li>
+        <p>permisos usuaro grupo y resto de usuarios// d directorio r read w write x execute // segunda seccion de grupo r-x // tercera seccion resto de usuarios r-x  // drwxr-xr-x (directorio) - -rw-r--r-- (archivo) // chmod cambia permisos 777 (propietario//grupo//usuarios) // los permisos van del 0 al 7 donde  (0-ningun permiso), (1-ejecucion-x), (2-escritura-w), (4-lectura-r), (7-todos-rwx), (6=4+2 - lectura y escritura - rw), (5=4+1 - lectura y ejecucion - rx), (3=2+1 - lectura y ejecucion - rx) // también esta el comando chown usuario:users archivo.txt  // groups Andres - nos dice en que grupo estamos // </p>
+        <li>Comandos para la red (linux y mac)</li>
+        <p><a href="https://victorroblesweb.es/2015/01/03/gestion-de-la-red-en-linux/">Enlace a los comandos de red en linux</a> // ifconfig todo lo de la red // se puede configurar la dns, cambiar la ip, desactivar el dispositivo de red con ifdown tambien ifup para reactivarlos, reiniciar conexiones con service networking restart // tambien se puede hacer ping a paginas para ver la conexion </p>
+        <li>Gestipon de paquetes en linux</li>
+        <p>instalar programas desde la consola // para configurar el servidor  /etc/apt/sources.list (repositorios de donde se descarga el sistema operativo) ahi se puede agregar nuevos repositorios // aptget es el gestor de paquetes (el mas antigüo) apt-get upadate  ejemplo apt-get install aptitude (otro buscador de software) aptitude update // aptitude search php - busca paquetes php lista de programas para instalar // aptitude install php // aptitude search git // aptitude install git // aptitude install composer // aptitude clean - se borran los paquetes y ya se puede instalar cualquier cosa // aptitude help para ver una ayuda de los comandos que hay </p>
+        <li>Procesos (linux y mac)</li>
+        <p>ps -ef (procesos abiertos) //ps -Agu // kil 1903(PID) // killall // killall firefox // jobs // top // </p>
+        <li>Filtros y comandos de texto</li>
+        <p>sort ordenar lineas de ficheros // cat no tiene orden // sort -r para ordenar de manera inversa // tail saca la cola de un archivo las 10 ultimas lineas // tail -n 3 las ultimas 3 lineas de algun archivo // head -n 6 /etc/passwd - saca las 6 primeras lineas del archivo // wc /etc/passwd numero de lineas bytes y palabras que tiene el archivo // cut sacar ciertos datos cut -c 3-9 /etc/passwd del caracter 3 al caracter 9 // cut -c  1-10 /etc/passwd  permite sacar del caracter 1 al caracter 10 // cut -d ":" -f2 /etc/passwd  delimitar por columna se aplica sobre un fichero o la salida de algun comando // ls -lh | rev | cut -d " " -f1 se puede ir concatenando comandos y se puede ir filtrando información // ls -lh | rev | cut -d " " -f1</p>
+        <li>Busqueda de texto y ficheros</li>
+        <p>grep root /etc/passwd nos muestra las lineas que contengan root // grep ^root /etc/passwd todas las lineas que empiecen con root // grep root$ /etc/passwd todas las lienas que acaben con root // $ greep -n error /var/log/* saca las coincidencia // $ greep -c error /var/log/* cuentas las coincidencias // ls -lh | greep bin busca coincidencias // find /etc -name "*.conf" busca archivo con terminacion.conf // find / -size +1024k -size -2024k entre esos tamaños // find . -iname "prueba.*"  // find . -name "prueba.txt" o find . -name "prueba.*"</p>
+    </ol>
+</body>
+</html>
